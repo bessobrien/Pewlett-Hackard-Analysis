@@ -57,4 +57,12 @@ emp_no int pk fk - Employees.emp_no\
 title varchar\
 from_date date\
 to_date date\
+\
+\
+\
+SELECT PG_GET_SERIAL_SEQUENCE('"titles"', 'emp_no');\
+SELECT CURRVAL(PG_GET_SERIAL_SEQUENCE('"titles"', 'emp_no')) AS "Current Value", MAX("emp_no") AS "Max Value" FROM "titles";\
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"titles"', 'emp_no')), (SELECT (MAX("emp_no") + 1) FROM "titles"), FALSE);\
+\
+SELECT * FROM titles;\
 }
